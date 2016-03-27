@@ -1,0 +1,16 @@
+<a class="btn btn-success" href="#/page/new/edit">New Page</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="page in db.rows">
+      <td class="span2"><a ng-href="#/page/{{ page.id }}">{{ page.id }}</a></td>
+      <td class="span6">{{ page.value }}</td>
+    </tr>
+  </tbody>
+</table>
