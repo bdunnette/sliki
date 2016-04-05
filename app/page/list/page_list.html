@@ -3,14 +3,14 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Data</th>
+      <th>Title</th>
+      <th>Body</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="page in db.rows">
-      <td class="span2"><a ng-href="#/page/{{ page.id }}">{{ page.id }}</a></td>
-      <td class="span6">{{ page.value }}</td>
+      <td class="span2"><a ng-href="#/page/{{ page.id }}">{{ page.key }}</a></td>
+      <td class="span6" ng-bind-html="page.value.body"></td>
     </tr>
   </tbody>
 </table>
