@@ -5,4 +5,5 @@
   </div>
   <text-angular ng-model="page.body"></text-angular>
   <button type="submit" class="btn btn-default">Save</button>
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout=5000>{{alert.msg}}</uib-alert>
 </form>

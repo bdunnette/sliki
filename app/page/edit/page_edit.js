@@ -41,16 +41,23 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
         }]);
     })
     .controller('pageEditCtrl', ['$rootScope', '$scope', 'cornercouch', '$routeParams', 'config', function($rootScope, $scope, cornercouch, $routeParams, config) {
+        $scope.alerts = [];
         $scope.db = $rootScope.couch.getDB(config.db);
+
         if ($routeParams.pageId === 'new') {
             $scope.page = $scope.db.newDoc();
         } else {
             $scope.page = $scope.db.getDoc($routeParams.pageId);
         }
+
         console.log($scope.page);
 
         $scope.savePage = function() {
             $scope.page.save();
             console.log($scope.page);
+            $scope.alerts.push({type:'success', msg: 'Saved version ' + $scope.page._rev})
+        };
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
         };
     }]);

@@ -3,10 +3,11 @@
 // Declare app level module which depends on views, and components
 angular.module('sliki', [
   'ngRoute',
+  'CornerCouch',
+  'ui.bootstrap',
   'sliki.pageList',
   'sliki.pageView',
-  'sliki.pageEdit',
-  'CornerCouch'
+  'sliki.pageEdit'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({
