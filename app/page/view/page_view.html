@@ -1,3 +1,13 @@
-<h2>{{page.title}}</h2><a href="#/page/{{page._id}}/edit" class='btn btn-success pull-right'>Edit</a>
-<div class="page-body" ng-bind-html="page.body">
+<a href="#/page/{{page._id}}/edit" class='btn btn-success pull-right'>Edit</a>
+<h2>{{page.title}}</h2>
+<div class="pagebody col-md-10" ng-bind-html="page.body">
+
+</div>
+<div class="pageAttachments col-md-2">
+    <h2>Attachments:</h2>
+    <ul>
+        <li ng-repeat="(filename, info) in page._attachments">
+            <a href="/{{dbName}}/{{$parent.page._id}}/{{filename}}"><img ng-if="isImage(info.content_type)" ng-src="/{{dbName}}/{{$parent.page._id}}/{{filename}}" width="100px" />{{filename}}</a>
+        </li>
+    </ul>
 </div>

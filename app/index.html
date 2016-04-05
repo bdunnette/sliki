@@ -7,6 +7,8 @@
 </head>
 
 <body>
+  <div class="collapse navbar-collapse" ng-controller="HeaderController">
+
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,24 +17,25 @@
         <span class="sr-only">Toggle navigation</span>
         <i class="fa fa-bars"></i>
       </button>
-      <a class="navbar-brand" href="#/">sliki</a>
+      <a class="navbar-brand" href="#/"><i class="fa fa-linux"></i> sliki</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#/">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#/transaction/foo">Link</a></li>
+        <li class="active" ng-class="{ active: isActive('/')}"><a href="#/"><i class="fa fa-home"></i> Home</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+</div>
+
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
+  <div class="container-fluid" ng-view></div>
 
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>

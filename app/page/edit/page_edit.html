@@ -1,9 +1,24 @@
-<form ng-submit="savePage()">
-  <div class="form-group">
-    <label for="pageTitle">Title</label>
-    <input type="text" class="form-control" id="pageTitle" ng-model="page.title" placeholder="Title">
-  </div>
-  <text-angular ng-model="page.body"></text-angular>
-  <button type="submit" class="btn btn-default">Save</button>
-  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout=5000 ng-bind-html="alert.msg"></uib-alert>
-</form>
+<div class="edit-page row-fluid">
+    <div class="pageContent col-md-10">
+        <div class="form-group">
+            <label for="pageTitle">Title</label>
+            <input type="text" class="form-control" id="pageTitle" ng-model="page.title" placeholder="Title">
+        </div>
+        <text-angular ng-model="page.body"></text-angular>
+        <button class="btn btn-default" ng-click="savePage()">Save</button>
+    </div>
+    <div class="pageAttachments col-md-2">
+        <h2>Attachments:</h2>
+        <ul>
+            <li ng-repeat="(filename, info) in page._attachments">
+                <img ng-if="isImage(info.content_type)" ng-src="/{{dbName}}/{{$parent.page._id}}/{{filename}}" width="100px" />{{filename}}
+                <button class="btn btn-danger" ng-click="detachFile(filename)">X</button>
+            </li>
+        </ul>
+        <input class="btn" type="file" multiple=true id="upload" ng-model="attachments" onchange="angular.element(this).scope().attachFiles()" />
+    </div>
+</div>
+
+<div class="alerts row-fluid">
+    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout=5000 ng-bind-html="alert.msg"></uib-alert>
+</div>

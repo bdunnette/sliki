@@ -10,7 +10,11 @@ angular.module('sliki.pageView', ['ngRoute', 'ngSanitize'])
 }])
 
 .controller('pageViewCtrl', ['$rootScope', '$scope', 'cornercouch', '$routeParams', 'config', function($rootScope, $scope, cornercouch, $routeParams, config) {
+  $scope.dbName = config.db;
   $scope.db = $rootScope.couch.getDB(config.db);
   $scope.page = $scope.db.getDoc($routeParams.pageId);
   console.log($scope.page);
+  $scope.isImage = function(fileType){
+    return fileType.includes('image');
+  }
 }]);
