@@ -18,7 +18,7 @@ config(['$routeProvider', function($routeProvider) {
 }]).
 controller('HeaderController', ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function(viewLocation) {
-      return viewLocation === $location.path();
+        return viewLocation === $location.path();
     };
 }]).
 run(function($rootScope, cornercouch) {
