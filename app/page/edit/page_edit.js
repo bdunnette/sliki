@@ -10,7 +10,7 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
     }])
     .config(function($provide) {
         // this demonstrates how to register a new tool and add it to the default toolbar
-        $provide.decorator('taOptions', ['taRegisterTool', '$window', '$delegate', function(taRegisterTool, $window, taOptions) { // $delegate is the taOptions we are decorating
+        $provide.decorator('taOptions', ['taRegisterTool', '$window', '$rootScope', 'config', '$delegate', function(taRegisterTool, $window, $rootScope, config, taOptions) { // $delegate is the taOptions we are decorating
             // taRegisterTool('test', {
             //     buttontext: 'Test',
             //     action: function() {
@@ -21,8 +21,18 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
             taRegisterTool('colourRed', {
                 iconclass: "fa fa-file-text-o",
                 action: function() {
+                    var parent = this;
                     var linkText = $window.getSelection().toString();
-                    this.$editor().wrapSelection('createLink', '#/p/' + linkText);
+                    var db = $rootScope.couch.getDB(config.db);
+                    db.query("sliki", "pages", {
+                            key: linkText,
+                            limit: 1
+                        })
+                        .success(function(data) {
+                            console.log(data.rows[0]);
+                            parent.$editor().wrapSelection('createLink', '#/page/' + data.rows[0].id);
+                        });
+
                 }
             });
             // add the button to the default toolbar definition
