@@ -25,12 +25,18 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
                     var linkText = $window.getSelection().toString();
                     var db = $rootScope.couch.getDB(config.db);
                     db.query("sliki", "pages", {
-                            key: linkText,
-                            limit: 1
+                          key: linkText,
+                          limit: 1
                         })
                         .success(function(data) {
-                            console.log(data.rows[0]);
-                            parent.$editor().wrapSelection('createLink', '#/page/' + data.rows[0].id);
+                          if (data.rows.length) {
+                              parent.$editor().wrapSelection('createLink', '#/page/' + data.rows[0].id);
+                          } else {
+                              parent.$parent.$parent.alerts.push({
+                                  type: 'danger',
+                                  msg: 'Unable to create link - no page with title: <strong>' + linkText + '</strong>'
+                              });
+                          }
                         });
 
                 }
@@ -55,7 +61,10 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
         $scope.savePage = function() {
             $scope.page.save();
             console.log($scope.page);
-            $scope.alerts.push({type:'success', msg: 'Saved version ' + $scope.page._rev})
+            $scope.alerts.push({
+                type: 'success',
+                msg: 'Saved version ' + $scope.page._rev
+            })
         };
         $scope.closeAlert = function(index) {
             $scope.alerts.splice(index, 1);
