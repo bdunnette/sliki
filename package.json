@@ -8,9 +8,9 @@
   "author": "Brian Dunnette <brian@dunnette.us>",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.11.1",
+    "browser-sync": "^2.18.6",
     "couchdb-ensure": "^1.3.3",
-    "couchdb-push": "^2.3.1",
+    "couchdb-push": "^2.3.2",
     "gulp": "^3.9.1",
     "gulp-couchapp": "^0.1.0",
     "gulp-foreach": "^0.1.0",

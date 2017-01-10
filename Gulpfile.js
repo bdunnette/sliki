@@ -46,7 +46,7 @@ gulp.task('fixtures', function() {
     .pipe(foreach(function(stream, file) {
       push(dbUrl, file.path, function(err, resp) {
         if (err) {
-          console.error(err)
+          console.error(err);
         }
         console.log(resp);
       });
