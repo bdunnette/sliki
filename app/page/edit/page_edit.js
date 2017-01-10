@@ -1,8 +1,6 @@
-'use strict';
-
 angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
 
-.config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/page/:pageId/edit', {
             templateUrl: 'page/edit/page_edit.html',
             controller: 'pageEditCtrl'
@@ -70,7 +68,7 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
             $scope.alerts.push({
                 type: 'success',
                 msg: 'Saved version ' + $scope.page._rev
-            })
+            });
         };
 
         $scope.attachFiles = function() {
@@ -86,7 +84,7 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
             $scope.page.detach(fileName).success(function(data) {
                 $scope.alerts.push({
                     msg: 'Detached file ' + fileName + '; page is now at version ' + data.rev
-                })
+                });
             });
         };
 

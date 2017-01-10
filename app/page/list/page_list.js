@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('sliki.pageList', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {

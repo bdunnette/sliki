@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('sliki.pageView', ['ngRoute', 'ngSanitize'])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -16,5 +14,5 @@ angular.module('sliki.pageView', ['ngRoute', 'ngSanitize'])
     console.log($scope.page);
     $scope.isImage = function(fileType) {
         return fileType.includes('image');
-    }
+    };
 }]);
