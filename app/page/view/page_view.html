@@ -7,7 +7,9 @@
     <h2>Attachments:</h2>
     <ul>
         <li ng-repeat="(filename, info) in page._attachments">
-            <a href="/{{dbName}}/{{$parent.page._id}}/{{filename}}"><img ng-if="isImage(info.content_type)" ng-src="/{{dbName}}/{{$parent.page._id}}/{{filename}}" width="100px" />{{filename}}</a>
+            <a href="/{{dbName}}/{{$parent.page._id}}/{{filename}}">
+                <img ng-if="isImage(info.content_type)" ng-src="/{{dbName}}/{{$parent.page._id}}/{{filename}}" width="100px"
+                />{{filename}}</a>
         </li>
     </ul>
 </div>

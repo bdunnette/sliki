@@ -1,14 +1,13 @@
 angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
-
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/page/:pageId/edit', {
             templateUrl: 'page/edit/page_edit.html',
             controller: 'pageEditCtrl'
         });
     }])
-    .config(function($provide) {
+    .config(function ($provide) {
         // this demonstrates how to register a new tool and add it to the default toolbar
-        $provide.decorator('taOptions', ['taRegisterTool', '$window', '$rootScope', 'config', '$delegate', function(taRegisterTool, $window, $rootScope, config, taOptions) { // $delegate is the taOptions we are decorating
+        $provide.decorator('taOptions', ['taRegisterTool', '$window', '$rootScope', 'config', '$delegate', function (taRegisterTool, $window, $rootScope, config, taOptions) { // $delegate is the taOptions we are decorating
             // taRegisterTool('test', {
             //     buttontext: 'Test',
             //     action: function() {
@@ -20,7 +19,7 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
             // Add a "wikilink" tool that will take selected text & link to the local page with that name
             taRegisterTool('wikiLink', {
                 iconclass: "fa fa-file-text-o",
-                action: function() {
+                action: function () {
                     var parent = this;
                     var linkText = $window.getSelection().toString();
                     if (linkText) {
@@ -29,7 +28,7 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
                                 key: linkText,
                                 limit: 1
                             })
-                            .success(function(data) {
+                            .success(function (data) {
                                 if (data.rows.length) {
                                     parent.$editor().wrapSelection('createLink', '#/page/' + data.rows[0].id);
                                 } else {
@@ -48,7 +47,7 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
             return taOptions;
         }]);
     })
-    .controller('pageEditCtrl', ['$rootScope', '$scope', 'cornercouch', '$routeParams', 'config', function($rootScope, $scope, cornercouch, $routeParams, config) {
+    .controller('pageEditCtrl', ['$rootScope', '$scope', 'cornercouch', '$routeParams', 'config', function ($rootScope, $scope, cornercouch, $routeParams, config) {
         $scope.alerts = [];
         $scope.dbName = config.db;
         $scope.db = $rootScope.couch.getDB(config.db);
@@ -62,7 +61,7 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
 
         console.log($scope.page);
 
-        $scope.savePage = function() {
+        $scope.savePage = function () {
             $scope.page.save();
             console.log($scope.page);
             $scope.alerts.push({
@@ -71,28 +70,28 @@ angular.module('sliki.pageEdit', ['ngRoute', 'ngSanitize', 'textAngular'])
             });
         };
 
-        $scope.attachFiles = function() {
+        $scope.attachFiles = function () {
             var fileInput = document.getElementById("upload");
             console.log(fileInput);
-            $scope.page.attachMulti(fileInput.files, function() {
+            $scope.page.attachMulti(fileInput.files, function () {
                 fileInput.value = "";
             });
         };
 
-        $scope.detachFile = function(fileName) {
+        $scope.detachFile = function (fileName) {
             console.log(fileName);
-            $scope.page.detach(fileName).success(function(data) {
+            $scope.page.detach(fileName).success(function (data) {
                 $scope.alerts.push({
                     msg: 'Detached file ' + fileName + '; page is now at version ' + data.rev
                 });
             });
         };
 
-        $scope.isImage = function(fileType) {
+        $scope.isImage = function (fileType) {
             return fileType.includes('image');
         };
 
-        $scope.closeAlert = function(index) {
+        $scope.closeAlert = function (index) {
             $scope.alerts.splice(index, 1);
         };
     }]);
