@@ -10,5 +10,7 @@ A basic wiki using Angular & CouchDB
     + Ubuntu users:`curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs`
 3. Install gulp: `sudo npm install -g gulp`
 4. `npm install` to install the necessary Node components
-5. `gulp` to push the application to CouchDB & open it in a browser
+5. Create your CouchDB database (named _sliki_)
+6. `gulp` to push the application to CouchDB & open it in a browser
     + NOTE: If you have a username and password set on your CouchDB (which is a good thing - you can do it via [fauxton]( http://localhost:5984/_utils/fauxton/#createAdmin)), you'll need to give gulp that username and password, like so: `gulp --username myuser --password mypass`
+7. Browse your wiki at http://localhost:5984/sliki/_design/sliki/_rewrite
